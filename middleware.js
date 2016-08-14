@@ -7,7 +7,7 @@ const mw = {
   paginate: require('warepot/paginate')
 }
 
-const ErrorModel = require('mongopot/models/error')
+const ErrorModel = require('./model')
 
 function find(req, res, next) {
   const page = Math.max(0, req.query.page) || 0
