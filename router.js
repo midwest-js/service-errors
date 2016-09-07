@@ -1,7 +1,7 @@
 'use strict'
 
 const router = new (require('express')).Router()
-const { isAdmin } = require('express-module-membership/passport/authorization-middleware')
+const { isAdmin } = require('midwest-module-membership/passport/authorization-middleware')
 
 const mw = require('./middleware')
 
