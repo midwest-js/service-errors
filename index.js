@@ -1,6 +1,7 @@
-'use strict'
+'use strict';
 
 module.exports = {
-  routes: require('./routes'),
-  middleware: require('./middleware')
-}
+  middleware: require('./middleware'),
+  model: require('./model'),
+  router: require('./router'),
+};
