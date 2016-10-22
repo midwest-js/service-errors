@@ -2,60 +2,11 @@
 
 const _ = require('lodash');
 
-const mw = {
-  formatQuery: require('midwest/middleware/format-query'),
-  paginate: require('midwest/middleware/paginate'),
-};
+const formatQuery = require('midwest/middleware/format-query');
+const paginate = require('midwest/middleware/paginate');
+const rest = require('midwest/middleware/rest');
 
 const ErrorModel = require('./model');
-
-function find(req, res, next) {
-  const page = Math.max(0, req.query.page) || 0;
-  const perPage = Math.max(0, req.query.limit) || res.locals.perPage;
-
-  const query = ErrorModel.find(_.omit(req.query, 'limit', 'sort', 'page'),
-    null,
-    { sort: req.query.sort || '-dateCreated', lean: true });
-
-  if (perPage) {
-    query.limit(perPage).skip(perPage * page);
-  }
-
-  query.exec((err, errors) => {
-    res.locals.errors = errors;
-    next(err);
-  });
-}
-
-function findById(req, res, next) {
-  ErrorModel.findById(req.params.id, (err, page) => {
-    if (err) return next(err);
-    if (page) res.locals.page = page;
-    next();
-  });
-}
-
-function getAll(req, res, next) {
-  ErrorModel.find({}).sort('-dateCreated').exec((err, errors) => {
-    if (err) return next(err);
-
-    res.status(200);
-
-    res.locals.errors = errors;
-
-    next();
-  });
-}
-
-function remove(req, res, next) {
-  ErrorModel.remove({ _id: req.params.id }, (err) => {
-    if (err) return next(err);
-
-    res.status(204).locals.ok = true;
-
-    next();
-  });
-}
 
 function removeQuery(req, res, next) {
   ErrorModel.remove(_.omit(req.query, 'limit', 'sort', 'page'), (err) => {
@@ -67,12 +18,8 @@ function removeQuery(req, res, next) {
   });
 }
 
-module.exports = {
-  find,
-  findById,
-  formatQuery: mw.formatQuery(['sort', 'limit', 'page', 'status']),
-  getAll,
-  paginate: mw.paginate(ErrorModel, 200),
-  remove,
+module.exports = Object.assign(rest(ErrorModel), {
+  formatQuery: formatQuery(['sort', 'limit', 'page', 'status']),
+  paginate: paginate(ErrorModel, 200),
   removeQuery,
-};
+});
