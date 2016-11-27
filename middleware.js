@@ -4,22 +4,22 @@ const _ = require('lodash');
 
 const formatQuery = require('midwest/factories/format-query');
 const paginate = require('midwest/factories/paginate');
-const rest = require('midwest/factories/rest');
+const factory = require('midwest/factories/rest');
 
-const ErrorModel = require('./model');
+const handlers = require('./handlers');
 
-function removeQuery(req, res, next) {
-  ErrorModel.remove(_.omit(req.query, 'limit', 'sort', 'page'), (err) => {
+function removeByQuery(req, res, next) {
+  handlers.removeByQuery(_.omit(req.query, 'limit', 'sort', 'page'), (err, count) => {
     if (err) return next(err);
 
-    res.status(204).locals.ok = true;
+    if (count) res.status(204);
 
     next();
   });
 }
 
-module.exports = Object.assign(rest(ErrorModel), {
+module.exports = Object.assign(factory('errors', null, handlers), {
   formatQuery: formatQuery(['sort', 'limit', 'page', 'status']),
-  paginate: paginate(ErrorModel, 200),
-  removeQuery,
+  paginate: paginate(handlers.count, 200),
+  removeByQuery,
 });

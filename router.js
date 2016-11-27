@@ -6,8 +6,9 @@ const { isAdmin } = require('midwest-module-membership/passport/authorization-mi
 const mw = require('./middleware');
 
 router.route('/')
-  .get(isAdmin, mw.formatQuery, mw.paginate, mw.query)
-  .delete(isAdmin, mw.formatQuery, mw.removeQuery);
+  .get(isAdmin, mw.getAll)
+  .get(isAdmin, mw.formatQuery, mw.paginate, mw.find)
+  .delete(isAdmin, mw.formatQuery, mw.removeByQuery);
 
 router.route('/:id')
   .get(isAdmin, mw.findById)
