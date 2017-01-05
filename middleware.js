@@ -18,7 +18,10 @@ function removeByQuery(req, res, next) {
   });
 }
 
-module.exports = Object.assign(factory('errors', null, handlers), {
+module.exports = Object.assign(factory({
+  plural: 'errors',
+  handlers: handlers,
+}), {
   formatQuery: formatQuery(['sort', 'limit', 'page', 'status']),
   paginate: paginate(handlers.count, 200),
   removeByQuery,

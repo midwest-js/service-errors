@@ -32,6 +32,9 @@ function removeByQuery(json, cb) {
   });
 }
 
-module.exports = Object.assign(factory('errors', columns, null, null), {
+module.exports = Object.assign(factory({
+  table: 'errors',
+  columns: columns,
+}), {
   removeByQuery,
 });
