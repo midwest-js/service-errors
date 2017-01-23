@@ -34,7 +34,7 @@ function removeByQuery(json, cb) {
 
 module.exports = Object.assign(factory({
   table: 'errors',
-  columns: columns,
+  columns,
 }), {
   removeByQuery,
 });

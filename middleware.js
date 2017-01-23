@@ -20,7 +20,7 @@ function removeByQuery(req, res, next) {
 
 module.exports = Object.assign(factory({
   plural: 'errors',
-  handlers: handlers,
+  handlers,
 }), {
   formatQuery: formatQuery(['sort', 'limit', 'page', 'status']),
   paginate: paginate(handlers.count, 200),
