@@ -28,8 +28,6 @@ CREATE TABLE errors (
 );
 
 
-ALTER TABLE errors OWNER TO millerkonsult_supreme;
-
 --
 -- Name: errors_id_seq; Type: SEQUENCE; Schema: public; Owner: millerkonsult_supreme
 --
@@ -40,9 +38,6 @@ CREATE SEQUENCE errors_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE errors_id_seq OWNER TO millerkonsult_supreme;
 
 --
 -- Name: errors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: millerkonsult_supreme
