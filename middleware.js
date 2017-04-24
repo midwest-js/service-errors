@@ -9,13 +9,11 @@ const factory = require('midwest/factories/rest');
 const handlers = require('./handlers');
 
 function removeByQuery(req, res, next) {
-  handlers.removeByQuery(_.omit(req.query, 'limit', 'sort', 'page'), (err, count) => {
-    if (err) return next(err);
-
+  handlers.removeByQuery(_.omit(req.query, 'limit', 'sort', 'page')).then((count) => {
     if (count) res.status(204);
 
     next();
-  });
+  }).catch(next);
 }
 
 module.exports = Object.assign(factory({

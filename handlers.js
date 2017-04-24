@@ -1,38 +1,33 @@
 'use strict';
 
-const p = require('path');
-
-const pg = require('pg');
-
 const factory = require('midwest/factories/handlers');
+const sql = require('midwest/pg/sql-helpers');
 
-const { values: generateValues, where } = require('midwest/util/sql');
-
-const config = require(p.join(PWD, 'server/config/postgres'));
+const config = require('./config');
 
 const columns = ['id', 'body', 'columnNumber', 'dateCreated', 'description', 'details', 'filename', 'ip', 'lineNumber', 'method', 'message', 'name', 'path', 'query', 'session', 'stack', 'status', 'statusText', 'user', 'userAgent', 'xhr'];
 
-const pool = new pg.Pool(config);
-
-function removeByQuery(json, cb) {
+function removeByQuery(json, client = config.db) {
   let query = 'DELETE FROM errors';
   let values;
 
   if (Object.keys(json).length) {
-    query += ` WHERE ${where(json)}`;
-    values = generateValues(json);
+    query += ` WHERE ${sql.where(json)}`;
+    values = sql.values(json);
   }
 
   query += ';';
 
-  pool.query(query, values, (err, result) => {
-    if (err) return cb(err);
+  return client.query(query, values).then((result) => {
+    if (config.emitter) config.emitter.emit('db', 'errors');
 
-    cb(null, result.rowCount);
+    return result.rowCount;
   });
 }
 
 module.exports = Object.assign(factory({
+  db: config.db,
+  emitter: config.emitter,
   table: 'errors',
   columns,
 }), {
