@@ -1,17 +1,16 @@
 'use strict';
 
 const router = new (require('express')).Router();
-const { isAdmin } = require('midwest-module-membership/passport/authorization-middleware');
 
 const mw = require('./middleware');
 
 router.route('/')
-  .get(isAdmin, mw.getAll)
-  .get(isAdmin, mw.formatQuery, mw.paginate, mw.find)
-  .delete(isAdmin, mw.formatQuery, mw.removeByQuery);
+  .get(mw.getAll)
+  .get(mw.formatQuery, mw.paginate, mw.find)
+  .delete(mw.formatQuery, mw.removeByQuery);
 
 router.route('/:id')
-  .get(isAdmin, mw.findById)
-  .delete(isAdmin, mw.remove);
+  .get(mw.findById)
+  .delete(mw.remove);
 
 module.exports = router;

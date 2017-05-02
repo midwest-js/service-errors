@@ -1,8 +1,6 @@
 'use strict';
 
 const _ = require('lodash');
-// const isEmail = require('validator/lib/isEmail');
-const isURL = require('validator/lib/isURL');
 
 const tests = {
   db: (value) => {
@@ -13,7 +11,7 @@ const tests = {
 };
 
 const config = require('./config-base.js');
-const errored = require('midwest/util/validate')(tests)(config);
+const errored = require('ok')(tests)(config);
 
 if (errored.length) {
   throw new Error(`Configuration is invalid: ${errored.join(', ')}`);

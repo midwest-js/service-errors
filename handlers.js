@@ -1,7 +1,7 @@
 'use strict';
 
 const factory = require('midwest/factories/handlers');
-const sql = require('midwest/pg/sql-helpers');
+const sql = require('easy-pg/sql-helpers');
 
 const config = require('./config');
 
