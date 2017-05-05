@@ -2,10 +2,32 @@
 
 const _ = require('lodash');
 const factory = require('midwest/factories/handlers');
-const sql = require('easy-pg/sql-helpers');
+const sql = require('easy-postgres/sql-helpers');
 const resolveCache = require('./resolve-cache');
 
-const columns = ['id', 'body', 'columnNumber', 'dateCreated', 'description', 'details', 'filename', 'ip', 'lineNumber', 'method', 'message', 'name', 'path', 'query', 'session', 'stack', 'status', 'statusText', 'user', 'userAgent', 'xhr'];
+const columns = [
+  'id',
+  'body',
+  'columnNumber',
+  'createdAt',
+  'description',
+  'details',
+  'filename',
+  'ip',
+  'lineNumber',
+  'method',
+  'message',
+  'name',
+  'path',
+  'query',
+  'session',
+  'stack',
+  'status',
+  'statusText',
+  'user',
+  'userAgent',
+  'xhr',
+];
 
 module.exports = _.memoize((config) => {
   function removeByQuery(json, client = config.db) {
