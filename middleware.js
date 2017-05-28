@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 const formatQuery = require('midwest/factories/format-query');
 const paginate = require('midwest/factories/paginate');
-const factory = require('midwest/factories/rest');
+const factory = require('midwest/factories/rest-middleware');
 const resolveCache = require('./resolve-cache');
 
 module.exports = _.memoize((config) => {

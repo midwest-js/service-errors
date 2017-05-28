@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const factory = require('midwest/factories/handlers');
+const factory = require('midwest/factories/rest-handlers');
 const sql = require('easy-postgres/sql-helpers');
 const resolveCache = require('./resolve-cache');
 
