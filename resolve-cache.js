@@ -1,23 +1,23 @@
-'use strict';
+'use strict'
 
-const _ = require('lodash');
+const _ = require('lodash')
 
-const previous = [];
+const previous = []
 
 module.exports = (obj) => {
-  let result;
+  let result
 
   if (obj != null) {
-    result = previous.find((item) => _.isEqual(item, obj));
+    result = previous.find((item) => _.isEqual(item, obj))
   }
 
   if (result) {
-    return result;
+    return result
   } else {
     if (obj != null) {
-      previous.push(obj);
+      previous.push(obj)
     }
 
-    return obj;
+    return obj
   }
-};
+}

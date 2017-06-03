@@ -1,21 +1,21 @@
-'use strict';
+'use strict'
 
-const _ = require('lodash');
-const express = require('express');
-const resolveCache = require('./resolve-cache');
+const _ = require('lodash')
+const express = require('express')
+const resolveCache = require('./resolve-cache')
 
 module.exports = _.memoize((config) => {
-  const router = new express.Router();
-  const mw = require('./middleware')(config);
+  const router = new express.Router()
+  const mw = require('./middleware')(config)
 
   router.route('/')
     .get(mw.getAll)
     .get(mw.formatQuery, mw.paginate, mw.find)
-    .delete(mw.formatQuery, mw.removeByQuery);
+    .delete(mw.formatQuery, mw.removeByQuery)
 
   router.route('/:id')
     .get(mw.findById)
-    .delete(mw.remove);
+    .delete(mw.remove)
 
-  return router;
-}, resolveCache);
+  return router
+}, resolveCache)

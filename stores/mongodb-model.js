@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const ErrorSchema = new mongoose.Schema({
   body: {},
@@ -41,7 +41,7 @@ const ErrorSchema = new mongoose.Schema({
   // non-standard, TCB
   userAgent: String,
   // non-standard, TCB
-  xhr: Boolean,
-});
+  xhr: Boolean
+})
 
-module.exports = mongoose.model('Error', ErrorSchema);
+module.exports = mongoose.model('Error', ErrorSchema)
