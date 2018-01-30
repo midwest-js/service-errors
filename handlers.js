@@ -2,7 +2,7 @@
 
 const _ = require('lodash')
 const factory = require('midwest/factories/rest-handlers')
-const sql = require('easy-postgres/sql-helpers')
+const sql = require('@bmp/pg/sql-helpers')
 const resolveCache = require('./resolve-cache')
 
 const columns = [
