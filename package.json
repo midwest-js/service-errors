@@ -26,6 +26,7 @@
   "homepage": "https://github.com/thebitmill/midwest-service-errors#readme",
   "dependencies": {
     "@bmp/pg": "0.0.6",
+    "deep-equal-resolver": "0.0.2",
     "express": "^4.16.3",
     "lodash": "^4.17.5",
     "midwest": "^0.5.0"

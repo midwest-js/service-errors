@@ -5,7 +5,7 @@ const _ = require('lodash')
 const formatQuery = require('midwest/factories/format-query')
 const paginate = require('midwest/factories/paginate')
 const factory = require('midwest/factories/rest')
-const resolveCache = require('./resolve-cache')
+const resolver = require('deep-equal-resolver')()
 
 module.exports = _.memoize((config) => {
   const handlers = require('./handlers')(config)
@@ -26,4 +26,4 @@ module.exports = _.memoize((config) => {
     paginate: paginate(handlers.count, 200),
     removeByQuery
   })
-}, resolveCache)
+}, resolver)

@@ -3,7 +3,7 @@
 const _ = require('lodash')
 const factory = require('@bmp/pg/handlers')
 const sql = require('@bmp/pg/sql-helpers')
-const resolveCache = require('./resolve-cache')
+const resolver = require('deep-equal-resolver')()
 
 const columns = [
   'id',
@@ -56,4 +56,4 @@ module.exports = _.memoize((config) => {
   }), {
     removeByQuery
   })
-}, resolveCache)
+}, resolver)

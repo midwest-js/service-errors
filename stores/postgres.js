@@ -1,7 +1,7 @@
 'use strict'
 
 const _ = require('lodash')
-const resolveCache = require('../resolve-cache')
+const resolver = require('deep-equal-resolver')()
 
 module.exports = _.memoize((config) => {
   const { create } = require('../handlers')(config)
@@ -15,4 +15,4 @@ module.exports = _.memoize((config) => {
       console.error(error)
     })
   }
-}, resolveCache)
+}, resolver)
